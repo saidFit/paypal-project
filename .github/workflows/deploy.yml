@@ -18,6 +18,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
+
       - name: Add GitHub to known hosts
         run: |
           mkdir -p ~/.ssh
