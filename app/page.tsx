@@ -126,7 +126,7 @@ const Page = () => {
           <div>
             <h2>Subscribe</h2>
             <div className="flex gap-3">
-              <button className="bg-slate-300 rounded-md p-2" onClick={() => setSubscriptionType('daily')}>Daily ($1)</button>
+              <button className="bg-slate-300 rounded-md p-2" onClick={() => setSubscriptionType('daily')}>Daily purchases ($1)</button>
               <button className="bg-slate-300 rounded-md p-2" onClick={() => setSubscriptionType('weekly')}>Weekly ($5)</button>
               <button className="bg-slate-300 rounded-md p-2" onClick={() => setSubscriptionType('monthly')}>Monthly ($10)</button>
               <button className="bg-slate-300 rounded-md p-2" onClick={() => setSubscriptionType('yearly')}>Yearly ($30)</button>
