@@ -14,15 +14,18 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Add SSH key to agent
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.5.4  # Try using the latest version
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
+      - name: Check SSH key format (for debugging)
+        run: |
+          echo "SSH Key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}"  # For debugging only, remove after testing
 
       - name: Add GitHub to known hosts
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-      
+
       - name: Your next step
         run: echo "Perform your operations here"
