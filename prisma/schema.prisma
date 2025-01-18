@@ -1,0 +1,35 @@
+
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  clerkId       String          @unique
+  todos         Todo[]
+  subscription  Subscription?
+}
+
+model Todo {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  content  String
+  userId   String
+  user     User    @relation(fields: [userId], references: [id])
+}
+
+model Subscription {
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
+ userId   String @unique
+  user     User    @relation(fields: [userId], references: [id])
+  type        String
+  position    Int @default(0)
+  startDate   DateTime
+  endDate     DateTime
+}
