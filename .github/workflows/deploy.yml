@@ -1,26 +1,27 @@
-name: Deploy to EC2
+name: Example CI/CD Workflow
 
 on:
   push:
     branches:
-      - main  # Deploy when you push to the 'main' branch
+      - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest  # Use GitHub's Ubuntu runner
+  build:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2  # Checkout your code
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up SSH key
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}  # Use the SSH key stored in secrets
+      - name: Add SSH key to agent
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
-    - name: Deploy to EC2
-      run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@3.88.210.210 << 'EOF'
-          cd /path/to/your/project    # Navigate to your project directory
-          git pull origin main         # Pull the latest code from GitHub
-        EOF
+      - name: Add GitHub to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      
+      - name: Your next step
+        run: echo "Perform your operations here"
