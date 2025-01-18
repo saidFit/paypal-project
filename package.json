@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.3.2",
+    "@clerk/nextjs": "^6.9.14",
     "@paypal/react-paypal-js": "^8.7.0",
     "@prisma/client": "^5.22.0",
     "axios": "^1.7.7",
