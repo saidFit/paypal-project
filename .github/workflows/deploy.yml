@@ -1,0 +1,26 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Deploy when you push to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use GitHub's Ubuntu runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Checkout your code
+
+    - name: Set up SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}  # Use the SSH key stored in secrets
+
+    - name: Deploy to EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@3.88.210.210 << 'EOF'
+          cd /path/to/your/project    # Navigate to your project directory
+          git pull origin main         # Pull the latest code from GitHub
+        EOF
